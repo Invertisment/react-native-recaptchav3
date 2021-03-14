@@ -9,6 +9,7 @@ type IProps = {
   onReceiveToken: (captchaToken: string) => void
   siteKey: string
   action: string
+  webViewStyle: ViewStyle
 }
 
 const patchPostMessageJsCode = `(${String(function () {
@@ -33,11 +34,6 @@ const getInvisibleRecaptchaContent = (siteKey: string, action: string) => {
     <script src="https://www.google.com/recaptcha/api.js?render=${siteKey}"></script>
     <script>window.grecaptcha.ready(function() { ${getExecutionFunction(siteKey, action)} });</script>
     </head></html>`
-}
-
-// Fixes https://github.com/jarden-digital/react-native-recaptchav3/issues/14
-const androidOpacityHack: ViewStyle = {
-  opacity: 0.99
 }
 
 class ReCaptchaComponent extends React.PureComponent<IProps> {
@@ -70,7 +66,7 @@ class ReCaptchaComponent extends React.PureComponent<IProps> {
         onMessage={(e: any) => {
           this.props.onReceiveToken(e.nativeEvent.data)
         }}
-        style={androidOpacityHack} />
+        style={this.props.webViewStyle} />
     </View>
   }
 }
