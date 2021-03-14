@@ -1,7 +1,7 @@
 import {platform} from './constants'
 
 import * as React from 'react'
-import {View, Platform, ViewStyle} from 'react-native'
+import {View, ViewStyle} from 'react-native'
 import { WebView } from 'react-native-webview'
 
 type IProps = {
@@ -35,16 +35,9 @@ const getInvisibleRecaptchaContent = (siteKey: string, action: string) => {
     </head></html>`
 }
 
-const androidOpacityHack: ViewStyle = {
-  opacity: 0.99,
-}
-
 // Fixes https://github.com/jarden-digital/react-native-recaptchav3/issues/14
-function getWebViewStyle() {
-  if (Platform.OS === 'android' && Platform.Version >= 28) {
-    return androidOpacityHack
-  }
-  return null
+const androidOpacityHack: ViewStyle = {
+  opacity: 0.99
 }
 
 class ReCaptchaComponent extends React.PureComponent<IProps> {
@@ -77,7 +70,7 @@ class ReCaptchaComponent extends React.PureComponent<IProps> {
         onMessage={(e: any) => {
           this.props.onReceiveToken(e.nativeEvent.data)
         }}
-        style={getWebViewStyle()} />
+        style={androidOpacityHack} />
     </View>
   }
 }
