@@ -1,7 +1,7 @@
 import {platform} from './constants'
 
 import * as React from 'react'
-import {View, ViewStyle} from 'react-native'
+import {View} from 'react-native'
 import { WebView } from 'react-native-webview'
 
 type IProps = {
@@ -9,7 +9,6 @@ type IProps = {
   onReceiveToken: (captchaToken: string) => void
   siteKey: string
   action: string
-  webViewStyle: ViewStyle
 }
 
 const patchPostMessageJsCode = `(${String(function () {
@@ -65,8 +64,7 @@ class ReCaptchaComponent extends React.PureComponent<IProps> {
         }}
         onMessage={(e: any) => {
           this.props.onReceiveToken(e.nativeEvent.data)
-        }}
-        style={this.props.webViewStyle} />
+        }} />
     </View>
   }
 }
