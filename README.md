@@ -59,7 +59,6 @@ import ReCaptchaV3 from '@haskkor/react-native-recaptchav3'
 |**`captchaDomain`**|Your url registered with Google reCAPTCHA|`None`|`true`|`string`|
 |**`onReceiveToken`**|The callback used to get the captcha token from the component|`None`|`true`|`(captchaToken: string) => void`|
 |**`siteKey`**|The site key provided by Google reCAPTCHA|`None`|`true`|`string`|
-|**`webViewStyle`**|Additional style for the underlying WebView|`None`|`null`|`React.ViewStyle`|
 
 ## [Changelog](https://github.com/Haskkor/react-native-recaptchav3/blob/master/CHANGELOG.md)
 
